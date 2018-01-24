@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML 5 Web Storage</title>
+
+<link href="reset.css" type="text/css" rel="stylesheet" />
+
+<link href="webStorage_Style.css" type="text/css" rel="stylesheet" />
+
+<script>
+window.addEventListener("load",init);
+
+function init(){
+	if(typeof(Storage)!=="undefined"){
+	
+	display();
+	
+	var button=document.getElementById("button");
+	button.addEventListener("click",saveInfo);
+	}
+	
+	else{
+	//old bowser	
+	}
+}
+
+function saveInfo(){
+	var flavor=document.getElementById("flavor").value;
+	var comments=document.getElementById("comments").value;
+	var sprinkles=document.getElementById("sprinkles").value;
+	var amount=document.getElementById("amount").value;
+
+	
+	localStorage.setItem("flavorName",flavor);
+	localStorage.setItem("userComments",comments);
+	localStorage.setItem("numSprinkles",sprinkles);
+	localStorage.setItem("amountDonut",amount);
+	
+	
+	display();
+	
+}
+
+function display(){
+	var rightBox=document.getElementById("useroutput");
+	var theflavor=localStorage.getItem("flavorName");
+	var theComments=localStorage.getItem("userComments");
+	var theSprinkles=localStorage.getItem("numSprinkles");
+	var theAmount=localStorage.getItem("amountDonut");
+	
+	if(theComments==undefined){
+		document.getElementById("useroutput").innerHTML="";
+	}
+	else{ document.getElementById("useroutput").innerHTML="OUTPUT  <hr /><br /><br />Donut Flavor: "+theflavor+"<br /><br />  Donut Type: "+theComments+"<br /><br /> Number of Sprinkles: "+theSprinkles+"<br /><br /> Number of Donuts: "+theAmount;
+	}
+	
+}
+
+</script>
+
+
+
+</head>
+
+<body>
+
+<div id="main">
+	<section id="userinput">
+    INPUT <br>
+	<hr />
+    <br /><br />
+    <form>
+    
+    <div>Donut Flavor: <br /><input type="input" id="flavor" size="20"></div>
+    <br />
+    <div>Donut Type:<br /> <textarea id="comments" size ="20"></textarea></div>
+    <br />
+	<div>How many sprinkles: <br /><textarea id="sprinkles" size ="20"></textarea></div>
+    <br />
+	<div>How many Donuts: <br /><br /><input type="input" id="amount" size="20"></div>
+    <br />
+     <div><input type="button" id="button" value="Save"></div>
+    <img height="150px"src="Donut.png" alt="Donut">
+    </form>
+    </section>
+    
+    
+    <section id="useroutput">
+ OUTPUT  
+ 	<hr />
+    <br /><br />
+    </section>
+
+</div>
+
+
+
+</body>
+</html>
